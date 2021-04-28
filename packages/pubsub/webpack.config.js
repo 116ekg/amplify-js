@@ -18,6 +18,9 @@ module.exports = {
 		devtoolModuleFilenameTemplate: require('../aws-amplify/webpack-utils')
 			.devtoolModuleFilenameTemplate,
 	},
+	node: {
+		fs: 'empty',
+	},
 	// Enable sourcemaps for debugging webpack's output.
 	devtool: 'source-map',
 	resolve: {

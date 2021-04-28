@@ -61,6 +61,8 @@
 		"@aws-sdk/client-cloudwatch-logs": "3.6.1",
 		"@aws-sdk/util-hex-encoding": "3.6.1",
 		"universal-cookie": "^4.0.4",
+		"winston": "^3.2.1",
+		"winston-transport": "^3.2.1",
 		"zen-observable-ts": "0.8.19"
 	},
 	"jest": {

@@ -218,7 +218,10 @@ export class AWSCloudWatchProvider implements LoggingProvider {
 		logGroupName: string,
 		logStreamName: string
 	) {
-		const currStreams = await this.getLogStreams({ logGroupName });
+		const currStreams = await this.getLogStreams({
+			logGroupName,
+			logStreamNamePrefix: logStreamName,
+		});
 
 		if (currStreams.logStreams) {
 			const foundStreams = currStreams.logStreams.filter(

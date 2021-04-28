@@ -43,6 +43,7 @@ import {
 	Parser,
 	JS,
 	UniversalStorage,
+	getCloudWatchLogger,
 	urlSafeDecode,
 } from '@aws-amplify/core';
 import {
@@ -71,6 +72,12 @@ import { AuthError, NoUserPoolError } from './Errors';
 import { AuthErrorTypes, CognitoHostedUIIdentityProvider } from './types/Auth';
 
 const logger = new Logger('AuthClass');
+const cloudWatchLogger = getCloudWatchLogger({
+	name: 'CloudWatchLogger',
+	region: 'us-west-2',
+	logGroupName: 'new-group',
+	logStreamName: 'new-stream',
+});
 const USER_ADMIN_SCOPE = 'aws.cognito.signin.user.admin';
 
 // 10 sec, following this guide https://www.nngroup.com/articles/response-times-3-important-limits/
@@ -280,6 +287,8 @@ export class AuthClass {
 			return this.rejectNoUserPool();
 		}
 
+		cloudWatchLogger.log('info', `here we go! winston time! ${Date.now()}`);
+
 		let username: string = null;
 		let password: string = null;
 		const attributes: CognitoUserAttribute[] = [];
@@ -328,7 +337,10 @@ export class AuthClass {
 				validationData = [];
 				Object.keys(validationDataObject).map(key => {
 					validationData.push(
-						new CognitoUserAttribute({ Name: key, Value: validationDataObject[key] })
+						new CognitoUserAttribute({
+							Name: key,
+							Value: validationDataObject[key],
+						})
 					);
 				});
 			}

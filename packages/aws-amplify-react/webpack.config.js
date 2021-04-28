@@ -15,6 +15,9 @@ module.exports = {
 		'aws-amplify',
 		'react',
 	],
+	node: {
+		fs: 'empty',
+	},
 	output: {
 		filename: '[name].js',
 		path: __dirname + '/dist',
